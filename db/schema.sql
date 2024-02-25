@@ -11,5 +11,5 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL,
     phone_number VARCHAR(20),
     status VARCHAR(10) DEFAULT 'offline',
-    profile_picture_url VARCHAR(255) DEFAULT '/public/default_profile_pic.webp'
+    profile_picture_url VARCHAR(255) DEFAULT '/static/default_profile_pic.webp'
 );
