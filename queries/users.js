@@ -23,4 +23,16 @@ const createUser = async (user) => {
     }
 }
 
-module.exports = { getUsers, createUser }
+const logInUser = async (user) => {
+    try {
+        const loggedInUser = await db.oneOrNone("SELECT * FROM users WHERE name=$1", user.name)
+        if (!loggedInUser) return false
+        const passwordMatch = await bcrypt.compare(user.password_hash, loggedInUser.password_hash)
+        if (!passwordMatch) return false
+        return loggedInUser
+    } catch (err) {
+        return err
+    }
+}
+
+module.exports = { getUsers, createUser, logInUser }
