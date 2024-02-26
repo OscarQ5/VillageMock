@@ -10,6 +10,15 @@ const getUsers = async () => {
     }
 }
 
+const getUser = async (id) => {
+    try {
+        const user = await db.one("SELECT * FROM users WHERE user_id=$1", id)
+        return user
+    } catch (err) {
+        return err
+    }
+}
+
 const createUser = async (user) => {
     try {
         const { name, password_hash, email, phone_number, profile_picture_url } = user
@@ -35,4 +44,4 @@ const logInUser = async (user) => {
     }
 }
 
-module.exports = { getUsers, createUser, logInUser }
+module.exports = { getUsers, getUser, createUser, logInUser }
