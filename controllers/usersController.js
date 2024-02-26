@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const secret = process.env.SECRET
 const { getUsers, getUser, createUser, logInUser } = require('../queries/users')
 const contactsController = require('./contactsController')
-users.use('/:userId/contacts', contactsController)
+users.use('/:user_id/contacts', contactsController)
 
 users.get('/', async (req, res) => {
     try {

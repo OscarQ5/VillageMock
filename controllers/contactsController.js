@@ -1,9 +1,9 @@
 const express = require('express')
-const contacts = express.Router()
+const contacts = express.Router({ mergeParams: true })
 const { getContacts } = require('../queries/contacts')
 
-contacts.get('/:userId', async (req, res) => {
-    const userId = req.params.userId
+contacts.get('/', async (req, res) => {
+    const userId = req.params.user_id
     try {
         const userContacts = await getContacts(userId)
         res.status(200).json(userContacts)
