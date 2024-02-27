@@ -34,4 +34,13 @@ const updateContact = async (contactId, updatedContact) => {
     }
 }
 
-module.exports = { getContacts, createContact, updateContact }
+const deleteContact = async (contactId) => {
+    try {
+        await db.none("DELETE FROM contacts WHERE contact_id=$1", contactId)
+        return { message: "Contact deleted successfully" }
+    } catch (err) {
+        return err
+    }
+}
+
+module.exports = { getContacts, createContact, updateContact, deleteContact }
