@@ -55,6 +55,15 @@ const updateUser = async (id, updatedUser) => {
     } catch (err) {
         return err
     }
-};
+}
 
-module.exports = { getUsers, getUser, createUser, logInUser, updateUser }
+const deleteUser = async (id) => {
+    try {
+        const deletedUser = await db.none("DELETE FROM users WHERE user_id=$1", id)
+        return deletedUser
+    } catch (err) {
+        return err
+    }
+}
+
+module.exports = { getUsers, getUser, createUser, logInUser, updateUser, deleteUser }
