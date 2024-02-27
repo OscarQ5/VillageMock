@@ -22,4 +22,16 @@ const createContact = async (newContact) => {
     }
 }
 
-module.exports = { getContacts, createContact }
+const updateContact = async (contactId, updatedContact) => {
+    const { name, email, phone_number, profile_picture_url } = updatedContact
+    const profilePic = profile_picture_url ? profile_picture_url : '/static/default_profile_pic.webp'
+    try {
+        const updatedContact = await db.one("UPDATE contacts SET name=$1, email=$2, phone_number=$3, profile_picture_url=$4 WHERE contact_id=$5 RETURNING *",
+            [name, email, phone_number, profilePic, contactId])
+        return updatedContact
+    } catch (err) {
+        return err
+    }
+}
+
+module.exports = { getContacts, createContact, updateContact }
